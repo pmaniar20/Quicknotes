@@ -14,13 +14,13 @@ function Navbar() {
     const handleLogout = (evt) => {
         localStorage.removeItem('token')
         navigate('/login')
-        showAlert("GoodBye :(", "success")
+        showAlert("GoodBye !", "success")
     }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light ">
             <div className="container-fluid">
-                <NavLink activeclassname="active" className="navbar-brand" to="/">Notebook</NavLink>
+                <NavLink activeclassname="active" className="navbar-brand" to="/">Quick Notes</NavLink>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -46,7 +46,7 @@ function Navbar() {
                                     </li>
                                     <li>
                                         <Button className="nav-item ms-2" component={NavLink} to="/register" variant="outlined" color="secondary" style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "0.9rem" }}>
-                                            Join us
+                                            Register
                                         </Button>
                                     </li>
                                 </div> :

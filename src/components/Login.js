@@ -1,8 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { TextField, Button, InputAdornment, InputLabel, OutlinedInput, FormControl, IconButton, FormHelperText } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import GoogleIcon from '@mui/icons-material/Google';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "../styles/home.css"
 import Alertss from "./Alertss";

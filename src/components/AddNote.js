@@ -50,9 +50,9 @@ function FormValidations() {
         <div>
             <Navbar />
             <div className="container mt-4 addnotes" >
-                <Button className="mb-4" variant="text" color="secondary" startIcon={<ArrowBackIcon />} component={Link} to="/" style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif" }}>Home</Button>
+                <Button className="mb-4" variant="text" color="secondary" startIcon={<ArrowBackIcon />} component={Link} to="/" style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif" }}>Back</Button>
                 <h2 style={{ fontWeight: "Bold" }}>Create new Note</h2>
-                <p className="mb-4">Add  a new note with your info / notes</p>
+               
                 <form autoComplete="off" noValidate onSubmit={handleSubmit} >
                     <div className="title mb-4">
                         <TextField 
