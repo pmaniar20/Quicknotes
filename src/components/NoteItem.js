@@ -67,6 +67,7 @@ function NoteItem({ note }) {
                     </div>
                     <h6 className="card-subtitle mb-2 text-muted">{note.tag}</h6>
                     <p className="card-text">{note.description.slice(0, 500)}</p>
+                    <p className="card-text"><small className="text-muted">Last updated {new Date(note.updatedAt).toLocaleString()}</small></p>
                 </div>
             </div>
         </div>
