@@ -25,10 +25,12 @@ To install all the dependencies and packages of the web app simply run the follo
 To run the app on local server, first you need to start the frontend server by running the following command on the cmd terminal
   npm
   ```sh
-  npm start src\index.js
+  cd src
+  npm start
   ```
 Then you need to start the backend server by running the following command on the cmd terminal
 npm
 ```sh
-npm start backend\index.js
+cd backend
+npm start
 ```
