@@ -6,7 +6,6 @@ const crypto = require('crypto')
 const User = require('../models/User')
 const jwt = require('jsonwebtoken');
 const ExpressError = require('../utils/ExpressError');
-const sendEmail = require('../utils/sendEmail');
 
 
 module.exports.createUser = async (req, res) => {
@@ -17,7 +16,7 @@ module.exports.createUser = async (req, res) => {
         user: { id: user._id }
     }
     console.log(process.env.SECRET);
-    const authToken = jwt.sign(data, 'b0742345623214e7f5aac75a4200799d80b55d26a62b97cd23015c33ae3ac11513e2e7', { expiresIn: 600 })
+    const authToken = jwt.sign(data, 'b0742345623214e7f5aac75a4200799d80b55d26a62b97cd23015c33ae3ac11513e2e7', { expiresIn: 60000 })
     res.status(201).json({ success: true, user: resp, authToken })
 }
 

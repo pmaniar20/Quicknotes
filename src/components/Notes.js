@@ -44,7 +44,7 @@ function Notes() {
             <h1 className="display-6">Your Notes: </h1>
             <Stack spacing={3} direction="row" sx={{ mt: 2 }}>
                 <div style={{ display:"flex", alignItems:'center', justifyContent:'center', flexDirection:"row"}}>
-                    <TextField id="outlined-basic" label="Search..." variant="outlined" value={searchField} onChange={(e)=>{
+                    <TextField id="outlined-basic" label="Search..." variant="outlined"  value={searchField} onChange={(e)=>{
                         setSearchField(e.target.value)
                     }} />
                 </div>
@@ -65,7 +65,7 @@ function Notes() {
                     </div>
                 </div>
                 <div style={{ display:"flex", alignItems:'center', justifyContent:'center', flexDirection:"row"}}>
-                    <Button variant="contained" onClick={async ()=>{ 
+                    <Button variant="contained" color="secondary" onClick={async ()=>{ 
                         var start_date = ""
                         var end_date = ""
                         if ( startDate.$d && endDate.$d ) {
@@ -82,13 +82,13 @@ function Notes() {
                         })
                         const data = await res.json()
                         setCurrNotes(data)
-
-                        if (data.success) {
-                            localStorage.setItem('token', data.token)
-                            getNotes()
+                        console.log(data);
+                        if (data.length !== 0) {
+                            // localStorage.setItem('token', data.token)
+                            // getNotes()
                             showAlert("Notes fetched successfully", "success")
                         } else {
-                            showAlert("Notes not fetched", "error")
+                            showAlert("No Notes in given Range", "error")
                         }
 
                     }}>Search</Button>
