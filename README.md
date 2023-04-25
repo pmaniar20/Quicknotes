@@ -17,6 +17,8 @@ You can clone the repository using the github clone option or download the zip f
 To install all the dependencies and packages of the web app simply run the following command on the cmd terminal
  npm
   ```sh
+  npm install
+  cd backend
   npm install 
   ```
 
