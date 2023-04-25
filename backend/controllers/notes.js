@@ -69,8 +69,40 @@ module.exports.deleteNote = async (req, res) => {
 
 module.exports.search = async (req, res) => {
     const { id } = req.user
-    const { search } = req.params
-    const notes = await Notes.find({ user: id, $or: [{ title: { $regex: search, $options: 'i' } }, { description: { $regex: search, $options: 'i' } }] })
+    const { searchField, start_date, end_date } = req.body
+    var notes = await Notes.find({ user: id})
+    if(searchField === ""){
+        if(start_date === "" && end_date === ""){
+            notes = await Notes.find({ user: id })
+        }
+        else{
+            if(start_date !== "" && end_date !== ""){
+                notes = await Notes.find({ user: id, $or: [{ createdAt: { $gte: start_date, $lte: end_date } }, { updatedAt: { $gte: start_date, $lte: end_date } }] })
+            }
+            else if(start_date !== "" && end_date === ""){
+                notes = await Notes.find({ user: id, $or: [{ createdAt: { $gte: start_date } }, { updatedAt: { $gte: start_date } }] })
+            }
+            else if(start_date === "" && end_date !== ""){
+                notes = await Notes.find({ user: id, $or: [{ createdAt: { $lte: end_date } }, { updatedAt: { $lte: end_date } }] })
+            }
+        }
+    }
+    else{
+        if(start_date === "" && end_date === ""){
+            notes = await Notes.find({ user: id, $or: [{ title: { $regex: searchField, $options: 'i' } }, { description: { $regex: searchField, $options: 'i' } }] })
+        }
+        else{
+            if(start_date !== "" && end_date !== ""){
+                notes = await Notes.find({ user: id, $or: [{ title: { $regex: searchField, $options: 'i' } }, { description: { $regex: searchField, $options: 'i' }}, { createdAt: { $gte: start_date, $lte: end_date } }, { updatedAt: { $gte: start_date, $lte: end_date } }] })
+            }
+            else if(start_date !== "" && end_date === ""){
+                notes = await Notes.find({ user: id, $or: [{ title: { $regex: searchField, $options: 'i' } }, { description: { $regex: searchField, $options: 'i' }}, { createdAt: { $gte: start_date } }, { updatedAt: { $gte: start_date } }] })
+            }
+            else if(start_date === "" && end_date !== ""){
+                notes = await Notes.find({ user: id, $or: [{ title: { $regex: searchField, $options: 'i' } }, { description: { $regex: searchField, $options: 'i' }}, { createdAt: { $lte: end_date } }, { updatedAt: { $lte: end_date } }] })
+            }
+        }
+    }
     // return notes in sorted order
     notes.sort((a, b) => {
         return new Date(b.updatedAt) - new Date(a.updatedAt)
@@ -82,9 +114,26 @@ module.exports.searchTag = async (req, res) => {
     const { id } = req.user
     const { tag } = req.params
     const notes = await Notes.find({ user: id, $or: [{ tag: { $regex: tag, $options: 'i' } }] })
-    // return notes in sorted order
+    
     notes.sort((a, b) => {
         return new Date(b.updatedAt) - new Date(a.updatedAt)
     })
     res.status(200).json(notes)
 }
+
+module.exports.findnotesbetweentwodates = async (req, res) => {
+    const { id } = req.user
+    const { start, end } = req.body
+    const start_date = new Date(start)
+    const end_date = new Date(end)
+    console.log(start_date, end_date)
+    const notes = await Notes.find({ user: id, $or: [{ createdAt: { $gte: start_date.toISOString() , $lte: end_date.toISOString() } }, { updatedAt: { $gte: start_date.toISOString(), $lte: end_date.toISOString() } }] })
+    
+    notes.sort((a, b) => {
+        return new Date(b.updatedAt) - new Date(a.updatedAt)
+    }
+    )
+    res.status(200).json(notes)
+
+}
+

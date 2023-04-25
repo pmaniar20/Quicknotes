@@ -1,5 +1,5 @@
 const express = require("express");
-const {fetchAllNotes, addNote, updateNote, deleteNote, search, searchTag} = require("../controllers/notes")
+const {fetchAllNotes, addNote, updateNote, deleteNote, search, searchTag, findnotesbetweentwodates} = require("../controllers/notes")
 const {fetchUser, validateNewNote} = require("../middlewares")
 const catchAsync = require("../utils/catchAsync")
 
@@ -18,9 +18,12 @@ router.put('/:id', fetchUser, validateNewNote, catchAsync(updateNote))
 router.delete('/:id', fetchUser, catchAsync(deleteNote))
 
 //search
-router.get('/search/:search', fetchUser, catchAsync(search))
+router.post('/search', fetchUser, catchAsync(search))
 
 // search by tag
 router.get('/search/tag/:tag', fetchUser, catchAsync(searchTag))
+
+//notes between dates
+router.get('/search/date/', fetchUser, catchAsync(findnotesbetweentwodates))
 
 module.exports = router
