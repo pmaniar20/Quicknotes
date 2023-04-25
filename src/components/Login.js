@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { TextField, Button, InputAdornment, InputLabel, OutlinedInput, FormControl, IconButton, FormHelperText } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/home.css"
 import Alertss from "./Alertss";
 import { AlertContext } from '../context/AlertContext';
@@ -13,7 +13,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 function Login(props) {
 
-    const location = useLocation()
     const navigate = useNavigate()
     const { showAlert } = useContext(AlertContext)
     const [showPassword, setShowPassword] = useState(false)
